@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PADIApps - Soluzioni software innovative per il business italiano. App professionali per gestire le attività aziendali in modo efficiente.">
-    <meta name="keywords" content="app business, software aziendale, chiamate intermittenti, gestione lavoro">
-    <title>PADIApps - APP per Chiamata Intermittenti</title>
+    <meta name="description" content="PADIApps - FoxOrder: l'app completa per la gestione del tuo ristorante. Comande digitali, menù QR Code, stampa termica e molto altro.">
+    <meta name="keywords" content="foxorder, app ristorante, gestione comande, menù digitale, QR code ristorante, app camerieri">
+    <title>PADIApps - FoxOrder | Gestione Ristorante Completa</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -14,20 +14,737 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="PADIApps" />
     <link rel="manifest" href="/site.webmanifest" />
-    
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fox-orange: #E86B2C;
+            --fox-orange-light: #F4924D;
+            --fox-dark: #1A1A2E;
+            --fox-darker: #12121F;
+            --pro-color: #6A0DAD;
+            --pro-light: #8B3FCF;
+            --max-color: #E86B2C;
+            --max-light: #F4924D;
+            --bg-cream: #FFF9F4;
+            --bg-warm: #FEF0E5;
+            --text-dark: #2D2D3A;
+            --text-mid: #5A5A6E;
+            --text-light: #8E8E9F;
+            --green-check: #22C55E;
+            --red-cross: #EF4444;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-cream);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── HEADER ─────────────────────────────────── */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255,249,244,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(232,107,44,0.08);
+            transition: box-shadow 0.3s;
+        }
+        header.scrolled { box-shadow: var(--shadow-sm); }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo img { height: 40px; }
+        .logo span {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--text-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-mid);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--fox-orange); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--fox-orange);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ─── HERO ────────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232,107,44,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(106,13,173,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        .hero-text h1 .accent { color: var(--fox-orange); }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-mid);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-mid);
+            box-shadow: var(--shadow-sm);
+        }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green-check);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: var(--fox-orange);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 100px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(232,107,44,0.3);
+        }
+        .hero-cta:hover {
+            background: var(--fox-orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(232,107,44,0.4);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-icon-wrapper {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        .hero-icon-wrapper img {
+            width: 320px;
+            height: 320px;
+            border-radius: 60px;
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border-radius: 80px;
+            border: 2px dashed rgba(232,107,44,0.2);
+            animation: spin 30s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ─── FEATURES ────────────────────────────────── */
+        .features {
+            padding: 100px 24px;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        .section-header .label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--fox-orange);
+            margin-bottom: 12px;
+        }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            padding: 32px 28px;
+            background: var(--bg-cream);
+            border-radius: var(--radius);
+            border: 1px solid rgba(232,107,44,0.06);
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .feature-card .icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 24px;
+            margin-bottom: 16px;
+            background: rgba(232,107,44,0.1);
+        }
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+
+        /* ─── PRICING ─────────────────────────────────── */
+        .pricing {
+            padding: 100px 24px;
+            background: var(--bg-cream);
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
+            background: white;
+            border-radius: 100px;
+            padding: 4px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: var(--shadow-sm);
+        }
+        .pricing-toggle button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: var(--text-mid);
+        }
+        .pricing-toggle button.active {
+            background: var(--fox-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(232,107,44,0.3);
+        }
+        .savings-badge {
+            display: inline-block;
+            background: var(--green-check);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 100px;
+            margin-left: 6px;
+        }
+
+        .pricing-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pricing-card.pro { border-color: rgba(106,13,173,0.15); }
+        .pricing-card.max { border-color: rgba(232,107,44,0.2); }
+
+        .pricing-card.max::before {
+            content: 'CONSIGLIATO';
+            position: absolute;
+            top: 20px;
+            right: -32px;
+            background: var(--fox-orange);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+        }
+
+        .plan-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .plan-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .pricing-card.pro .plan-name { color: var(--pro-color); }
+        .pricing-card.max .plan-name { color: var(--fox-orange); }
+
+        .plan-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+        .plan-price .currency {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .plan-price .amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        .plan-price .period {
+            font-size: 15px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        .plan-price-note {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+        .plan-features li .check {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            margin-top: 1px;
+        }
+        .plan-features li .check.yes {
+            background: rgba(34,197,94,0.1);
+            color: var(--green-check);
+        }
+        .plan-features li .check.no {
+            background: rgba(239,68,68,0.08);
+            color: var(--red-cross);
+        }
+        .plan-features li.disabled { color: var(--text-light); }
+
+        .plan-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .pricing-card.pro .plan-btn {
+            background: var(--pro-color);
+            color: white;
+        }
+        .pricing-card.pro .plan-btn:hover {
+            background: var(--pro-light);
+            transform: translateY(-1px);
+        }
+        .pricing-card.max .plan-btn {
+            background: var(--fox-orange);
+            color: white;
+            box-shadow: 0 6px 20px rgba(232,107,44,0.3);
+        }
+        .pricing-card.max .plan-btn:hover {
+            background: var(--fox-orange-light);
+            transform: translateY(-1px);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* ─── TRIAL BANNER ────────────────────────────── */
+        .trial-banner {
+            max-width: 900px;
+            margin: 40px auto 0;
+            background: linear-gradient(135deg, var(--fox-dark) 0%, #2A1A4E 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .trial-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(232,107,44,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .trial-banner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .trial-banner p {
+            font-size: 15px;
+            opacity: 0.8;
+            position: relative;
+        }
+
+        /* ─── OTHER APPS ──────────────────────────────── */
+        .other-apps {
+            padding: 80px 24px;
+            background: white;
+        }
+
+        .other-app-card {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 32px;
+            background: var(--bg-cream);
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .other-app-card img {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+        .other-app-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .other-app-info p {
+            font-size: 14px;
+            color: var(--text-mid);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .other-app-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--fox-orange);
+            text-decoration: none;
+            transition: gap 0.2s;
+        }
+        .other-app-link:hover { gap: 10px; }
+
+        /* ─── FOOTER ──────────────────────────────────── */
+        footer {
+            background: var(--fox-dark);
+            color: white;
+            padding: 60px 24px 30px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.7;
+            margin-top: 12px;
+        }
+        .footer-brand .logo-footer {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        footer h4 {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+        }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 10px; }
+        footer ul a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        footer ul a:hover { color: var(--fox-orange); }
+        footer .contact-item {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────────── */
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-text p { margin-left: auto; margin-right: auto; }
+            .hero-badges { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-icon-wrapper img { width: 200px; height: 200px; border-radius: 40px; }
+            .hero-icon-wrapper::before { inset: -14px; border-radius: 54px; }
+
+            .pricing-grid { grid-template-columns: 1fr; max-width: 440px; }
+
+            .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+
+            .other-app-card { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(255,249,244,0.98);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 20px;
+                box-shadow: var(--shadow-md);
+            }
+            .hamburger { display: flex; }
+            .hero { min-height: auto; padding: 120px 20px 60px; }
+            .features, .pricing, .other-apps { padding: 60px 16px; }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">
+            <a href="#home" class="logo">
                 <img src="padiapps_logo.png" alt="PADIApps Logo">
-            </div>
+                <span>PADIApps</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#apps">La Nostra Applicazione</a></li>
-                <li><a href="#about">Chi Siamo</a></li>
+                <li><a href="#features">Funzionalit&agrave;</a></li>
+                <li><a href="#pricing">Piani</a></li>
+                <li><a href="#apps">Altre App</a></li>
                 <li><a href="#contact">Contatti</a></li>
             </ul>
             <div class="hamburger">
@@ -38,104 +755,298 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Soluzioni Software Innovative per il Business</h1>
-            <p>Sviluppiamo applicazioni mobile professionali dedicate alle aziende italiane. Semplificiamo la gestione quotidiana con soluzioni conformi alla normativa italiana.</p>
-            <a href="#apps" class="cta-button">Scopri la nostra app</a>
-        </div>
-    </section>
-
-    <!-- Apps Section -->
-    <section class="container" id="apps">
-        <div class="section-title">
-            <h2>La Nostra Applicazione</h2>
-            <p>Soluzioni professionali per ogni esigenza aziendale</p>
-        </div>
-
-        <div class="app-showcase">
-            <!-- Chiamata Intermittenti App -->
-            <div class="app-card">
-                <div class="app-icon">
-                    <img src="chiamate_intermittenti_icon.png" alt="Chiamate Intermittenti" style="width: 80px; height: 80px; border-radius: 15px;">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h1>Il tuo ristorante, <span class="accent">sempre sotto controllo.</span></h1>
+                <p>FoxOrder &egrave; l'app completa per gestire comande, men&ugrave;, tavoli, prenotazioni e stampe. Full Cloud, multilingua, pronta all'uso.</p>
+                <div class="hero-badges">
+                    <span class="hero-badge"><span class="dot"></span>Full Cloud</span>
+                    <span class="hero-badge"><span class="dot"></span>12 Lingue</span>
+                    <span class="hero-badge"><span class="dot"></span>Stampa Termica</span>
+                    <span class="hero-badge"><span class="dot"></span>7 Giorni Gratis</span>
                 </div>
-                <h3>Chiamate Intermittenti</h3>
-                <p>Gestisci facilmente le comunicazioni obbligatorie per i lavoratori a chiamata in totale conformità con il D.Lgs. 81/2015.</p>
-                
-                <ul class="app-features">
-                    <li>Compilazione automatica moduli</li>
-                    <li>Invio diretto al Ministero del Lavoro</li>
-                    <li>Storico completo comunicazioni</li>
-                    <li>Gestione multi-azienda</li>
-                    <li>Supporto Email nelle Info dell'App</li>
-                </ul>
-
-                <a href="https://play.google.com/store" class="app-button">Scarica su Google Play</a>
+                <a href="#pricing" class="hero-cta">Scopri i Piani &rarr;</a>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-icon-wrapper">
+                    <img src="foxorder_icon.png" alt="FoxOrder - App Gestione Ristorante">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="about-content">
-            <div class="section-title">
-                <h2>Chi Siamo</h2>
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <span class="label">Funzionalit&agrave;</span>
+            <h2>Tutto ci&ograve; che serve al tuo ristorante</h2>
+            <p>Dall'ordine alla stampa in cucina, FoxOrder gestisce ogni aspetto del servizio in sala.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">&#127859;</div>
+                <h3>Gestione Comande</h3>
+                <p>Prendi gli ordini dallo Smartphone/Tablet in sala e inviali istantaneamente alla cucina con un tap.</p>
             </div>
-            <p>
-                <strong>PADIApps</strong> App per gestire le chiamate dei lavoratori intermittenti. Conforme al D.Lgs. 81/2015.
-            </p>
-            <p>
-                Ogni nostra applicazione è progettata con particolare attenzione alla normativa italiana e alle esigenze 
-                specifiche del mercato locale. Crediamo nella semplicità d'uso unita alla potenza professionale.
-            </p>
+            <div class="feature-card">
+                <div class="icon">&#128196;</div>
+                <h3>Men&ugrave; con QR Code</h3>
+                <p>I tuoi clienti scansionano il QR e consultano il men&ugrave; digitale dal loro telefono.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#128424;</div>
+                <h3>Stampa Termica</h3>
+                <p>Stampa le comande direttamente sulla stampante termica in cucina via Bluetooth o WiFi.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#128205;</div>
+                <h3>Sale e Tavoli</h3>
+                <p>Configura sale, tavoli e visualizza lo stato in tempo reale.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#128197;</div>
+                <h3>Prenotazioni</h3>
+                <p>Gestisci le prenotazioni dei tavoli con data, ora e note per ogni cliente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#127757;</div>
+                <h3>Multilingua</h3>
+                <p>Supporto per 12 lingue. Perfetto per ristoranti in zone turistiche e internazionali.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#9729;&#65039;</div>
+                <h3>Full Cloud</h3>
+                <p>Sincronizzazione in tempo reale con gli altri dispositivi associati ovunque siate.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#128106;</div>
+                <h3>Gestione Dipendenti</h3>
+                <p>Crea account illimitati per il personale.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">&#127838;</div>
+                <h3>Ingredienti e Allergeni</h3>
+                <p>Gestisci ingredienti, fuori men&ugrave;, note e allergeni conforme al Reg. UE 1169/2011.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="section-header">
+            <span class="label">Piani e Prezzi</span>
+            <h2>Scegli il piano perfetto per te</h2>
+            <p>Tutti i prezzi sono IVA compresa. Prova gratuita di 7 giorni senza carta di credito.</p>
+        </div>
+
+        <div class="pricing-toggle">
+            <button class="active" onclick="showPricing('mensile')">Mensile</button>
+            <button onclick="showPricing('annuale')">Annuale <span class="savings-badge">Risparmia</span></button>
+        </div>
+
+        <div class="pricing-grid" id="pricing-mensile">
+            <!-- PRO Mensile -->
+            <div class="pricing-card pro">
+                <div class="plan-icon">&#128142;</div>
+                <div class="plan-name">Professional</div>
+                <div class="plan-desc">Per ristoranti con una sala</div>
+                <div class="plan-price">
+                    <span class="currency">&euro;</span>
+                    <span class="amount">23</span>
+                    <span class="period">/mese</span>
+                </div>
+                <div class="plan-price-note">IVA compresa</div>
+                <ul class="plan-features">
+                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+                    <li><span class="check yes">&#10003;</span>1 Sala con 30 Tavoli</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+                    <li><span class="check yes">&#10003;</span>Asporto</li>
+                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+                    <li class="disabled"><span class="check no">&#10007;</span>Sale Illimitate con Tavoli Illimitati</li>
+                    <li class="disabled"><span class="check no">&#10007;</span>Gestione Statistiche</li>
+                </ul>
+                <a href="#" class="plan-btn">Prova Gratis 7 Giorni</a>
+            </div>
+
+            <!-- MAX Mensile -->
+            <div class="pricing-card max">
+                <div class="plan-icon">&#127942;</div>
+                <div class="plan-name">Max</div>
+                <div class="plan-desc">Per ristoranti senza limiti</div>
+                <div class="plan-price">
+                    <span class="currency">&euro;</span>
+                    <span class="amount">30</span>
+                    <span class="period">/mese</span>
+                </div>
+                <div class="plan-price-note">IVA compresa</div>
+                <ul class="plan-features">
+                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+                    <li><span class="check yes">&#10003;</span>Sale Illimitate con Tavoli Illimitati</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Statistiche</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+                    <li><span class="check yes">&#10003;</span>Asporto</li>
+                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+                </ul>
+                <a href="#" class="plan-btn">Prova Gratis 7 Giorni</a>
+            </div>
+        </div>
+
+        <div class="pricing-grid" id="pricing-annuale" style="display: none;">
+            <!-- PRO Annuale -->
+            <div class="pricing-card pro">
+                <div class="plan-icon">&#128142;</div>
+                <div class="plan-name">Professional</div>
+                <div class="plan-desc">Per ristoranti con una sala</div>
+                <div class="plan-price">
+                    <span class="currency">&euro;</span>
+                    <span class="amount">170</span>
+                    <span class="period">/anno</span>
+                </div>
+                <div class="plan-price-note">IVA compresa &mdash; risparmi il 38%</div>
+                <ul class="plan-features">
+                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+                    <li><span class="check yes">&#10003;</span>1 Sala con 30 Tavoli</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+                    <li><span class="check yes">&#10003;</span>Asporto</li>
+                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+                    <li class="disabled"><span class="check no">&#10007;</span>Sale Illimitate con Tavoli Illimitati</li>
+                    <li class="disabled"><span class="check no">&#10007;</span>Gestione Statistiche</li>
+                </ul>
+                <a href="#" class="plan-btn">Prova Gratis 7 Giorni</a>
+            </div>
+
+            <!-- MAX Annuale -->
+            <div class="pricing-card max">
+                <div class="plan-icon">&#127942;</div>
+                <div class="plan-name">Max</div>
+                <div class="plan-desc">Per ristoranti senza limiti</div>
+                <div class="plan-price">
+                    <span class="currency">&euro;</span>
+                    <span class="amount">249</span>
+                    <span class="period">/anno</span>
+                </div>
+                <div class="plan-price-note">IVA compresa &mdash; risparmi il 31%</div>
+                <ul class="plan-features">
+                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+                    <li><span class="check yes">&#10003;</span>Sale Illimitate con Tavoli Illimitati</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Statistiche</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+                    <li><span class="check yes">&#10003;</span>Asporto</li>
+                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+                </ul>
+                <a href="#" class="plan-btn">Prova Gratis 7 Giorni</a>
+            </div>
+        </div>
+
+        <div class="trial-banner">
+            <h3>&#127881; 7 Giorni di Prova Gratuita</h3>
+            <p>Prova tutte le funzionalit&agrave; di FoxOrder senza impegno. Nessuna carta di credito richiesta.</p>
+        </div>
+
+        <p class="pricing-note">Tutti gli abbonamenti si gestiscono tramite Google Play Store.</p>
+    </section>
+
+    <!-- Other Apps -->
+    <section class="other-apps" id="apps">
+        <div class="section-header">
+            <span class="label">Altre App</span>
+            <h2>Le nostre applicazioni</h2>
+        </div>
+        <div class="other-app-card">
+            <img src="chiamate_intermittenti_icon.png" alt="Chiamate Intermittenti">
+            <div class="other-app-info">
+                <h3>Chiamate Intermittenti</h3>
+                <p>Gestisci facilmente le comunicazioni obbligatorie per i lavoratori a chiamata in totale conformit&agrave; con il D.Lgs. 81/2015. Compilazione automatica moduli, invio diretto al Ministero del Lavoro e storico completo.</p>
+                <a href="https://play.google.com/store" class="other-app-link">Scarica su Google Play &rarr;</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>PADIApps</h3>
-                <p>Soluzioni software innovative per il business italiano.</p>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-footer">PADIApps</div>
+                <p>Soluzioni software innovative per il business italiano. App professionali per la ristorazione e la gestione aziendale.</p>
             </div>
-
-            <div class="footer-section">
-                <h3>Link Utili</h3>
+            <div>
+                <h4>Link Utili</h4>
                 <ul>
-                    <li><a href="https://pd15322.github.io/privacy-policy.html/" target="_blank">Privacy Policy</a></li>
-                    <li><a href="https://pd15322.github.io/Termini-e-Condizioni/" target="_blank">Termini e Condizioni</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Termini e Condizioni</a></li>
                 </ul>
             </div>
-
-            <div class="footer-section">
-                <h3>Contatti</h3>
+            <div>
+                <h4>Contatti</h4>
                 <ul>
-                    <li>Email: <a href="mailto:assistenza@padiapps.com">assistenza@padiapps.com</a></li>
-                    <li>Sede: Notaresco (TE), Italia</li>
-                    <li>P.IVA: 01958870675</li>
+                    <li><a href="mailto:assistenza@padiapps.com">assistenza@padiapps.com</a></li>
+                    <li class="contact-item">Notaresco (TE), Italia</li>
+                    <li class="contact-item">P.IVA: 01958870675</li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <p>&copy; 2024 PADIApps. Tutti i diritti riservati.</p>
+            <p>&copy; 2024 - 2026 PADIApps. Tutti i diritti riservati.</p>
         </div>
     </footer>
 
-    <!-- JavaScript per menu hamburger -->
     <script>
+        // Hamburger menu
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link =>
+            link.addEventListener('click', () => navLinks.classList.remove('active'))
+        );
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 20);
         });
-        
-        // Chiudi menu quando si clicca su un link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+
+        // Pricing toggle
+        function showPricing(period) {
+            const mensile = document.getElementById('pricing-mensile');
+            const annuale = document.getElementById('pricing-annuale');
+            const buttons = document.querySelectorAll('.pricing-toggle button');
+
+            if (period === 'mensile') {
+                mensile.style.display = 'grid';
+                annuale.style.display = 'none';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                mensile.style.display = 'none';
+                annuale.style.display = 'grid';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     </script>
