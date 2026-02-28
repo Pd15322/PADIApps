@@ -401,26 +401,29 @@
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
-        document.querySelectorAll('.nav-links a').forEach(link =>
-            link.addEventListener('click', () => navLinks.classList.remove('active'))
-        );
-        window.addEventListener('scroll', () => {
-            document.querySelector('header').classList.toggle('scrolled', window.scrollY > 20);
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+    document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('active')));
+    window.addEventListener('scroll', () => document.querySelector('header').classList.toggle('scrolled', window.scrollY > 20));
+
+    function showPricing(period) {
+        document.getElementById('pricing-mensile').style.display = period === 'mensile' ? 'grid' : 'none';
+        document.getElementById('pricing-annuale').style.display = period === 'annuale' ? 'grid' : 'none';
+        document.querySelectorAll('.pricing-toggle button').forEach((b, i) => {
+            b.classList.toggle('active', (i === 0) === (period === 'mensile'));
         });
-        function showPricing(period) {
-            const mensile = document.getElementById('pricing-mensile');
-            const annuale = document.getElementById('pricing-annuale');
-            const buttons = document.querySelectorAll('.pricing-toggle button');
-            if (period === 'mensile') {
-                mensile.style.display = 'grid'; annuale.style.display = 'none';
-                buttons[0].classList.add('active'); buttons[1].classList.remove('active');
-            } else {
-                mensile.style.display = 'none'; annuale.style.display = 'grid';
-                buttons[0].classList.remove('active'); buttons[1].classList.add('active');
-            }
-        }
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            e.preventDefault();
+            const t = document.querySelector(href);
+            if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+    });
+</script>
+</body>
+</html>
