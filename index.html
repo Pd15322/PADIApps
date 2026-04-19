@@ -158,8 +158,18 @@
             .nav-links { display: none; }
             .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(255,249,244,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; box-shadow: var(--shadow-md); }
             .hamburger { display: flex; }
-            .hero { min-height: auto; padding: 120px 20px 60px; }
+           .hero { min-height: auto; padding: 120px 20px 60px; }
             .features, .pricing, .other-apps { padding: 60px 16px; }
+        }
+        .annual-savings-box {
+            background: #22C55E;
+            color: white;
+            border-radius: 12px;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
         }
     </style>
 </head>
@@ -364,58 +374,58 @@
             </div>
         </div>
         <div class="pricing-grid" id="pricing-annuale" style="display: none;">
-            <div class="pricing-card pro">
-                <div class="plan-icon">&#128142;</div>
-                <div class="plan-name">Professional</div>
-                <div class="plan-desc">Per ristoranti con una sala</div>
-                <div class="plan-price"><span class="currency">&euro;</span><span class="amount">139</span><span class="period">/anno</span></div>
-                <a href="#" class="plan-btn">IVA Compresa &mdash; risparmi il 32% &mdash; <strong>solo €11,58/mese</strong></a></div>
-                <ul class="plan-features">
-                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
-                    <li><span class="check yes">&#10003;</span>1 Sala con 30 Tavoli</li>
-                    <li><span class="check yes">&#10003;</span>Sottocategorie Illimitate</li>
-                    <li><span class="check yes">&#10003;</span>Dispositivi Associabili Senza Limiti</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
-                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
-                    <li><span class="check yes">&#10003;</span>Asporto</li>
-                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
-                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
-                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
-                    <li><span class="check yes">&#10003;</span>2 Men&ugrave; Fissi</li>
-                    <li><span class="check yes">&#10003;</span>Magazzino Bevande</li>
-                    <li class="disabled"><span class="check no">&#10007;</span>Sale Illimitate con Tavoli Illimitati</li>
-                    <li class="disabled"><span class="check no">&#10007;</span>Gestione Statistiche</li>
-                    <li class="disabled"><span class="check no">&#10007;</span>Foto HD Menù Online</li>
-                </ul>
-                <a href="#" class="plan-btn">Prova Gratis 10 Giorni</a>
-            </div>
-            <div class="pricing-card max">
-                <div class="plan-icon">&#127942;</div>
-                <div class="plan-name">Max</div>
-                <div class="plan-desc">Per ristoranti senza limiti</div>
-                <div class="plan-price"><span class="currency">&euro;</span><span class="amount">239</span><span class="period">/anno</span></div>
-                <a href="#" class="plan-btn">IVA Compresa &mdash; risparmi il 29% &mdash; <strong>solo €19,92/mese</strong></a></div>
-                <ul class="plan-features">
-                    <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
-                    <li><span class="check yes">&#10003;</span>Sale Illimitate con Tavoli Illimitati</li>
-                    <li><span class="check yes">&#10003;</span>Sottocategorie Illimitate</li>
-                    <li><span class="check yes">&#10003;</span>Dispositivi Associabili Senza Limiti</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Statistiche</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
-                    <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
-                    <li><span class="check yes">&#10003;</span>Asporto</li>
-                    <li><span class="check yes">&#10003;</span>Prenotazioni</li>
-                    <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
-                    <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
-                    <li><span class="check yes">&#10003;</span>Gestione Bevande</li>
-                    <li><span class="check yes">&#10003;</span>Men&ugrave; Fissi Illimitati</li>
-                    <li><span class="check yes">&#10003;</span>Foto HD Menù Online</li>
-                </ul>
-                <a href="#" class="plan-btn">Prova Gratis 10 Giorni</a>
-            </div>
-        </div>
+    <div class="pricing-card pro">
+        <div class="plan-icon">&#128142;</div>
+        <div class="plan-name">Professional</div>
+        <div class="plan-desc">Per ristoranti con una sala</div>
+        <div class="plan-price"><span class="currency">&euro;</span><span class="amount">139</span><span class="period">/anno</span></div>
+        <div class="annual-savings-box">IVA Compresa &mdash; Risparmi il 32% &mdash; solo &euro;11,58/mese</div>
+        <ul class="plan-features">
+            <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+            <li><span class="check yes">&#10003;</span>1 Sala con 30 Tavoli</li>
+            <li><span class="check yes">&#10003;</span>Sottocategorie Illimitate</li>
+            <li><span class="check yes">&#10003;</span>Dispositivi Associabili Senza Limiti</li>
+            <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+            <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+            <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+            <li><span class="check yes">&#10003;</span>Asporto</li>
+            <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+            <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+            <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+            <li><span class="check yes">&#10003;</span>2 Men&ugrave; Fissi</li>
+            <li><span class="check yes">&#10003;</span>Magazzino Bevande</li>
+            <li class="disabled"><span class="check no">&#10007;</span>Sale Illimitate con Tavoli Illimitati</li>
+            <li class="disabled"><span class="check no">&#10007;</span>Gestione Statistiche</li>
+            <li class="disabled"><span class="check no">&#10007;</span>Foto HD Menù Online</li>
+        </ul>
+        <a href="#" class="plan-btn">Prova Gratis 10 Giorni</a>
+    </div>
+    <div class="pricing-card max">
+        <div class="plan-icon">&#127942;</div>
+        <div class="plan-name">Max</div>
+        <div class="plan-desc">Per ristoranti senza limiti</div>
+        <div class="plan-price"><span class="currency">&euro;</span><span class="amount">239</span><span class="period">/anno</span></div>
+        <div class="annual-savings-box">IVA Compresa &mdash; Risparmi il 29% &mdash; solo &euro;19,92/mese</div>
+        <ul class="plan-features">
+            <li><span class="check yes">&#10003;</span>Full Cloud — accedi da ovunque</li>
+            <li><span class="check yes">&#10003;</span>Sale Illimitate con Tavoli Illimitati</li>
+            <li><span class="check yes">&#10003;</span>Sottocategorie Illimitate</li>
+            <li><span class="check yes">&#10003;</span>Dispositivi Associabili Senza Limiti</li>
+            <li><span class="check yes">&#10003;</span>Gestione Statistiche</li>
+            <li><span class="check yes">&#10003;</span>Gestione Dipendenti</li>
+            <li><span class="check yes">&#10003;</span>Men&ugrave; con ingredienti, fuori men&ugrave; e note</li>
+            <li><span class="check yes">&#10003;</span>Gestione Griglia e Coperto</li>
+            <li><span class="check yes">&#10003;</span>Asporto</li>
+            <li><span class="check yes">&#10003;</span>Prenotazioni</li>
+            <li><span class="check yes">&#10003;</span>Men&ugrave; online con QR Code</li>
+            <li><span class="check yes">&#10003;</span>Stampe Illimitate</li>
+            <li><span class="check yes">&#10003;</span>Gestione Bevande</li>
+            <li><span class="check yes">&#10003;</span>Men&ugrave; Fissi Illimitati</li>
+            <li><span class="check yes">&#10003;</span>Foto HD Menù Online</li>
+        </ul>
+        <a href="#" class="plan-btn">Prova Gratis 10 Giorni</a>
+    </div>
+</div>
         <div class="trial-banner">
             <h3>&#127881; 10 Giorni di Prova Gratuita</h3>
             <p>Prova tutte le funzionalit&agrave; di FoxOrder senza impegno. Nessuna carta di credito richiesta.</p>
